@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 7, 2016 11:29:30 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.Nextofkin" table="nextofkin" catalog="bsm">
+        <id name="kinId" type="int">
+            <column name="KinId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="address" class="model.Address" fetch="select">
+            <column name="AddressId" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="Name" length="15" not-null="true" />
+        </property>
+        <property name="surname" type="string">
+            <column name="Surname" length="15" not-null="true" />
+        </property>
+        <property name="contactNo" type="string">
+            <column name="ContactNo" length="10" not-null="true" />
+        </property>
+        <set name="tenants" table="tenant" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="KinId" />
+            </key>
+            <one-to-many class="model.Tenant" />
+        </set>
+    </class>
+</hibernate-mapping>

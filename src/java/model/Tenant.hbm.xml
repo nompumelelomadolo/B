@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 7, 2016 11:29:30 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.Tenant" table="tenant" catalog="bsm">
+        <id name="tenantId" type="string">
+            <column name="TenantId" length="15" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="contract" class="model.Contract" fetch="select">
+            <column name="contractid" />
+        </many-to-one>
+        <many-to-one name="nextofkin" class="model.Nextofkin" fetch="select">
+            <column name="KinId" />
+        </many-to-one>
+        <many-to-one name="employee" class="model.Employee" fetch="select">
+            <column name="empid" />
+        </many-to-one>
+        <many-to-one name="address" class="model.Address" fetch="select">
+            <column name="AddressId" />
+        </many-to-one>
+        <property name="name" type="string">
+            <column name="name" length="25" />
+        </property>
+        <property name="surname" type="string">
+            <column name="surname" length="25" />
+        </property>
+        <property name="gender" type="java.lang.Character">
+            <column name="gender" length="1" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="35" not-null="true" />
+        </property>
+        <property name="contactNo" type="string">
+            <column name="contactNo" length="10" />
+        </property>
+        <set name="payments" table="payment" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="TenantId" length="15" not-null="true" />
+            </key>
+            <one-to-many class="model.Payment" />
+        </set>
+    </class>
+</hibernate-mapping>

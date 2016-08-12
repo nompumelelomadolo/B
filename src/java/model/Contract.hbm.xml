@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 7, 2016 11:29:30 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.Contract" table="contract" catalog="bsm">
+        <id name="contractId" type="int">
+            <column name="ContractId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="room" class="model.Room" fetch="select">
+            <column name="RoomId" not-null="true" />
+        </many-to-one>
+        <property name="startDate" type="date">
+            <column name="StartDate" length="10" not-null="true" />
+        </property>
+        <property name="endDate" type="date">
+            <column name="EndDate" length="10" not-null="true" />
+        </property>
+        <set name="tenants" table="tenant" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="contractid" />
+            </key>
+            <one-to-many class="model.Tenant" />
+        </set>
+    </class>
+</hibernate-mapping>

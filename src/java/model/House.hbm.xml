@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Jun 7, 2016 11:29:30 PM by Hibernate Tools 3.6.0 -->
+<hibernate-mapping>
+    <class name="model.House" table="house" catalog="bsm">
+        <id name="houseId" type="int">
+            <column name="HouseId" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="employee" class="model.Employee" fetch="select">
+            <column name="EmpId" not-null="true" />
+        </many-to-one>
+        <property name="houseAddress" type="string">
+            <column name="HouseAddress" length="50" not-null="true" />
+        </property>
+        <property name="noOfRooms" type="int">
+            <column name="NoOfRooms" not-null="true" />
+        </property>
+        <set name="rooms" table="room" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="HouseId" not-null="true" />
+            </key>
+            <one-to-many class="model.Room" />
+        </set>
+    </class>
+</hibernate-mapping>
