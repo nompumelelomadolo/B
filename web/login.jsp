@@ -12,7 +12,7 @@
         <title>JSP Page</title>
     </head>
     <body style="background-color:lightgrey;">
-            <img src="logo.png" width="128" height="150">
+    <center><img src="logo.png" width="128" height="150"></center>
        <form id  ="form" name = "form"  method ="post" action="LoginServlet">
         
         <p ><center>User Name:<input type="text" name ="name" id ="name" value ="" placeholder=""></p></center>
